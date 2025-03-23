@@ -5,6 +5,7 @@ import {SelectNavigation} from './components/select-option.js';
 import {Loading} from './components/loading.js';
 import {Heading} from './components/heading.js';
 import axios from 'axios';
+import {Focus} from './components/focus.js';
 
 type Props = {
 	name: string | undefined;
@@ -64,16 +65,22 @@ export default function App({}: Props) {
 			{mode === 'loading' ? <Loading /> : ''}
 			{mode === 'results' ? (
 				<>
-					<Text>Results found {results.content.groupingOptions.byDate.quotesOutboundGroups.length}</Text>
-					{results.content.groupingOptions.byDate.quotesOutboundGroups.map((result : any, key: number) => (
-						<>
-							<Text key={key}>
-								{key}:{result.monthYearDate.day}/{result.monthYearDate.month}/
-								{result.monthYearDate.year} -
-								£{results.content.results.quotes[result.quoteIds[0]].minPrice.amount}
-							</Text>
-						</>
-					))}
+					<Text bold>
+						Results found{' '}
+						{results.content.groupingOptions.byDate.quotesOutboundGroups.length}
+					</Text>
+					<Text italic color={`green`}>
+						Use 'Tab' to select options and 'Enter' to see more details.
+					</Text>
+					{results.content.groupingOptions.byDate.quotesOutboundGroups
+						.splice(0, 5)
+						.map((result: any, key: number) => (
+							<React.Fragment key={key}>
+								<Focus
+									text={`${result.monthYearDate.day}/${result.monthYearDate.month}/${result.monthYearDate.year} - £${results.content.results.quotes[result.quoteIds[0]].minPrice.amount}`}
+								/>
+							</React.Fragment>
+						))}
 				</>
 			) : (
 				''

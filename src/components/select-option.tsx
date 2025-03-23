@@ -14,16 +14,12 @@ export const SelectNavigation = ({onFinished, title}: SelectInputProps) => {
 
 	const items = [
 		{
-			label: 'First',
-			value: 'first',
+			label: 'Single Flight',
+			value: 'single-flight',
 		},
 		{
-			label: 'Second',
-			value: 'second',
-		},
-		{
-			label: 'Third',
-			value: 'third',
+			label: 'Return Flight',
+			value: 'return-flight',
 		},
 	];
 
